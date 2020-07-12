@@ -1,0 +1,45 @@
+@import "../../../../core/mixins/reset";
+@import "../../../../core/mixins/mixins.scss";
+@import "vars";
+@import "grid/grid";
+@function em($px){
+	@return $px/$font_body * 1em;
+}
+
+$font_body: 14px;
+
+.set {
+	@include  wh(100%, 100%);
+	flex-direction: column;
+}
+html{
+	height: 100vh;
+	min-height: 100vh
+}
+body{
+	@include  wh(100%);
+	//+bg(100%,url(../img/bb.png),left bottom,no-repeat)
+}
+
+@import "ui/mobile-ui";
+@import "media/mobile";
+$unit: 'px';
+@include  mq($mobile-large#{$unit}){
+	@import "ui/mobile-large-ui";
+	@import "media/mobile-large";
+}
+
+@include  mq($tablet#{$unit}){
+	@import "ui/tablet-ui";
+	@import "media/tablet";
+}
+
+@include  mq($tablet-large#{$unit}){
+	@import "ui/tablet-large-ui";
+	@import "media/tablet-large";
+}
+
+@include  mq($desktop#{$unit}){
+	@import "ui/desktop-ui";
+	@import "media/desktop";
+}

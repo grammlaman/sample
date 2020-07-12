@@ -1,0 +1,5 @@
+$unit : 'px';
+.section {
+	@include w($mobile#{$unit});
+	margin:0 auto;
+}

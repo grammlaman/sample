@@ -1,0 +1,81 @@
+$unit: 'px';
+     //Сетка 2.0
+     // m - мобильные колонки
+     // ml  - мобильные в развороте
+     // t   - планшетные
+     // tl  - планшетные в развороте
+     // d  -  десктопные колонки
+     //
+.pallet{
+	font-weight: 700;
+	text-align: center;
+}
+.bricks {
+	@include w(100%);
+	display: flex;
+	justify-content: flex-start;
+	flex-wrap: wrap
+}
+// Отступы
+.mr{
+	margin-right: auto
+}
+.ml{
+	margin-left: auto
+}
+// Работа с колонками
+$cols: 12;
+$col_check_d: 100;
+$col_check_t: 65.641;
+$col_check_tl: 87.5213;
+$col_check_ml: 41.0256;
+$col_check_m: 27.3504;
+$one_col: 100 / $cols;
+$units: '%';
+$cnt: 1;
+
+// m- t  tl  d
+@mixin grid($col_cnt,$letter,$cols,$full:null){
+	@for $i from 1 through $cols {
+		$one_full_col: (100% / $col_cnt); // 100px
+		$one_col: $one_full_col - ($one_full_col * 0.3); // 70px
+		$one_dep: $one_full_col - ($one_full_col * 0.7); // 30px
+		#{$letter}#{$i} {
+			border: 1px solid #11ff00;
+			width:  ($one_full_col * $i) - $one_dep;
+		@if($full) {
+				#{$letter}i#{$i} {
+					border: 1px solid tomato;
+					width: ($one_full_col * $i);
+				}
+				#{$letter}d#{$i} {
+					width: (($one_full_col) * $i) + $one_dep;
+				}
+				#{$letter}wi#{$i} {
+					border: 1px solid blue;
+					width: (($one_full_col) * $i) - $one_col;
+				}
+			}
+		}
+	}
+}
+@media screen and (min-width: $mobile#{$unit}){
+	$col_cnt: $mobile / $col_check_m;
+	@include  grid($col_cnt,'.m',$cols);
+}
+@media screen and (min-width: $mobile-large#{$unit}){
+	$col_cnt: $mobile-large / $col_check_ml;
+	@include  grid($col_cnt,'.ml',$cols);
+}
+@media screen and (min-width: $tablet#{$unit}){
+	$col_cnt: $tablet / $col_check_t;
+	@include  grid($col_cnt,'.t',$cols);
+}
+@media screen and (min-width: $tablet-large#{$unit}){
+	$col_cnt: $tablet-large / $col_check_tl;
+	@include  grid($col_cnt,'.tl',$cols);
+}
+@media screen and (min-width: $desktop#{$unit}){
+	$col_cnt: $desktop / $col_check_d;
+	@include  grid($col_cnt,'.d',$cols,'true');
+}
