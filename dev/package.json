@@ -6,7 +6,7 @@
   "dependencies": {
     "connect": "^2.30.2",
     "connect-livereload": "^0.6.0",
-    "gulp": "^3.9.1",
+    "gulp": "^4.0.2",
     "gulp-clean-css": "^3.10.0",
     "gulp-concat": "^2.6.1",
     "gulp-deploy-ftp": "^1.0.1",
